@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "league_assist"
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+
+LeagueAssist.configure do |config|
+  config.api_key = 'RGAPI-fdfc6106-5774-4cb6-a2d2-dd680fa60599'
+end
+
+require "irb"
+IRB.start(__FILE__)
