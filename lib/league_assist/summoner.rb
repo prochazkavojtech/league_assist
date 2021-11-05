@@ -1,22 +1,29 @@
 module LeagueAssist
   class Summoner < Request
-    attr_accessor :name, :id, :puuid, :region, :server
+    VERSION = 'v4'
+    attr_reader :name, :id, :puuid, :region, :server, :match_history
 
     def initialize(name: nil, server: nil)
-      account = request(server, "/lol/summoner/v4/summoners/by-name/#{name}")
+      account = request(server, "/lol/summoner/#{VERSION}/summoners/by-name/#{name}")
       @id = account['id']
       @puuid = account['puuid']
       @name = account['name']
       @server = server
       @region = get_region(server)
+      @match_history = get_match_history
     end
 
+    def get_match_history
+      MatchHistory.new(self)
+    end
+
+    private
 
     def get_region(server)
       case server
-      when 'br1', 'la1', 'la2', 'na1'
+      when 'br1', 'la1', 'la2', 'na1', 'oc1'
         'americas'
-      when 'jp1', 'kr', 'oc1'
+      when 'jp1', 'kr'
         'asia'
       when 'eun1', 'euw1', 'tr1', 'ru'
         'europe'

@@ -6,6 +6,9 @@ require_relative 'league_assist/configuration'
 require_relative 'league_assist/request'
 require_relative 'league_assist/error'
 require_relative 'league_assist/summoner'
+require_relative 'league_assist/match_history'
+require_relative 'league_assist/match'
+require_relative 'league_assist/participant'
 
 module LeagueAssist
   extend Configuration

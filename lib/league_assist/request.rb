@@ -2,7 +2,9 @@ module LeagueAssist
   class Request
     BASE_URL = 'https://%s.api.riotgames.com/'.freeze
 
-    def request(region, api)
+    protected 
+
+    def request(region, api, params = {})
       connection = Faraday.new do |conn|
         conn.url_prefix = format BASE_URL, region
         conn.request :json
@@ -10,7 +12,7 @@ module LeagueAssist
         conn.request :retry, max: 10
       end
 
-      response = connection.get(api, {}, { 'X-Riot-Token' => LeagueAssist.api_key })
+      response = connection.get(api, params, { 'X-Riot-Token' => LeagueAssist.api_key })
 
       response.body
     end
