@@ -45,7 +45,7 @@ Availible methods:
 
   # This load array of Matches, you can now look at all information about the match
   matches[0].participants # returns Participant class with information about players
-  duration[0].duration # 1400 - time in seconds
+  matches[0].duration # 1400 - time in seconds
 ```
 
 ## Contributing
