@@ -10,11 +10,15 @@ module LeagueAssist
       @name = account['name']
       @server = server
       @region = get_region(server)
-      @match_history = get_match_history
     end
 
-    def get_match_history
-      MatchHistory.new(self)
+    def match_history(start: 0, count: 1, refresh: false)
+      @match_history = get_match_history(start, count) if refresh || @match_history.nil?
+      @match_history
+    end
+
+    def get_match_history(start, count)
+      MatchHistory.new(self, start, count)
     end
 
     private

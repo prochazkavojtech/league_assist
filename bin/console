@@ -12,7 +12,7 @@ require "league_assist"
 # Pry.start
 
 LeagueAssist.configure do |config|
-  config.api_key = 'RGAPI-fdfc6106-5774-4cb6-a2d2-dd680fa60599'
+  config.api_key = 'RGAPI-bf78570c-9ef0-4d9e-9f61-4db8e448cc52'
 end
 
 require "irb"

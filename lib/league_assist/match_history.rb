@@ -2,11 +2,12 @@ module LeagueAssist
   class MatchHistory < Request
     VERSION = 'v5'.freeze
 
-    attr_reader :matches
+    attr_reader :matches, :created_at
 
-    def initialize(account)
-      match_ids = get_match_ids(account)
+    def initialize(account, start, count)
+      match_ids = get_match_ids(account, start, count)
       @matches = []
+      @created_at = Time.now
       
       match_ids.each do |id|
         @matches << Match.new(get_match(account, id))
@@ -17,8 +18,8 @@ module LeagueAssist
       request(account.region, "/lol/match/v5/matches/#{id}")
     end
 
-    def get_match_ids(account, count = 10)
-      request(account.region, "/lol/match/#{VERSION}/matches/by-puuid/#{account.puuid}/ids", { count: count })
+    def get_match_ids(account, start, count)
+      request(account.region, "/lol/match/#{VERSION}/matches/by-puuid/#{account.puuid}/ids", { start: start, count: count })
     end
   end
 end
